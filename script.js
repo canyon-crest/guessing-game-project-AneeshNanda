@@ -2,7 +2,16 @@
 let level, answer, score;
 const levelArr = document.getElementsByName("level"); 
 const scoreArr = [];
-Date.textContent  = time();
+const dateElement = document.getElementById("date");
+const playBtn = document.getElementById("playBtn");
+const guessBtn = document.getElementById("guessBtn");
+const guess = document.getElementById("guess");
+const msg = document.getElementById("msg");
+const wins = document.getElementById("wins");
+const avgScore = document.getElementById("avgScore");
+
+dateElement.textContent = time();
+guess.disabled = true;
 
 // add event listeners
 playBtn.addEventListener("click", play);
@@ -32,16 +41,18 @@ function makeGuess() {
     }
     score++; //valid guess add 1 to score
     if(userGuess < answer){
-        msg.textContent = "Too low, try again.";   
+        msg.textContent = "You guessed " + userGuess + ". Too low, try again.";
+        guess.value = "";
     } else if(userGuess > answer){
-        msg.textContent = "Too high, try again.";
+        msg.textContent = "You guessed " + userGuess + ". Too high, try again.";
+        guess.value = "";
     } else {
         msg.textContent = "Correct! You got it in " + score + " guesses. Press play to try again.";
         updateScore();
         reset();
-        
     } 
 }
+
 function reset(){
     playBtn.disabled = false;
     guessBtn.disabled = true;
@@ -52,28 +63,26 @@ function reset(){
     for (let i = 0; i < levelArr.length; i++){
         levelArr[i].disabled = false;
     }
-
 }
-    
-function updateScore() {    
+
+function updateScore() {
     scoreArr.push(score);
-    scoreArr.sort((a,b)=> a - b); // sort increasing order
+    scoreArr.sort((a,b)=> a - b);
     let lb = document.getElementsByName("leaderboard");
     wins.textContent = "Wins: " + scoreArr.length;
     let sum = 0;
-    for( let i=0; i<scoreArr.length; i++){
+    for(let i=0; i<scoreArr.length; i++){
         sum += scoreArr[i];
         if(i<lb.length){
-            lb[i].textContent = (i+1) + ". " + scoreArr[i];
+            lb[i].textContent = " " + scoreArr[i];
         }
     }
     let avg = sum/scoreArr.length;
     avgScore.textContent = "Average Score: " + avg.toFixed(2);
-
 }
+
 function time(){
     let d = new Date();
-    // concatenate a string with all the date info
-    d = d.getFullYear + "" + d.getTime();
+    d = d.getFullYear() + "" + d.getTime();
     return d;
 }
