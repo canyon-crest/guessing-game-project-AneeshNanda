@@ -1,33 +1,75 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>JavaScript Number Guessing Game</title>
-    <script src="script.js" defer></script>
-  </head>
-  <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guessing Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
     <p id="date"></p>
 
-    <h3>Level</h3>
-    <input type="radio" name="level" id="e" value="3" checked><label for="e">Easy</label>
-    <input type="radio" name="level" id="m" value="10"><label for="m">Medium</label>
-    <input type="radio" name="level" id="h" value="100"><label for="h">Hard</label>
+  
+    <main class="game-wrapper">
+        <h1>Guessing Game</h1>
+        <input type="text" id="nameInput" placeholder="Enter your name">
 
-    <button id="playBtn">Play</button>
+        <!-- Main Game Container -->
+        <div class="game-container">
+            <!-- Level Selection -->
+            <aside class="level-section">
+                <h2>Level</h2>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="level" value="3" checked>
+                        Easy (1-3)
+                    </label>
+                    <label>
+                        <input type="radio" name="level" value="10">
+                        Medium (1-10)
+                    </label>
+                    <label>
+                        <input type="radio" name="level" value="100">
+                        Hard (1-100)
+                    </label>
+                </div>
+            </aside>
 
-    <h3 id="msg">Select a Level</h3>
-    <input type="text" id="guess">
-    <button id="guessBtn" disabled>Guess</button>
-    <button id="giveUp" disabled>Give Up</button>
+            <!-- Game Controls -->
+            <section class="game-section">
+                <button id="playBtn">Play</button>
+                <p id="msg">Please enter your name before playing.</p>
+                <input type="number" id="guess" disabled placeholder="Enter your guess">
+                <div class="button-group">
+                    <button id="giveUp" disabled>Give up</button>
+                    <button id="guessBtn" disabled>Guess</button>
+                </div>
+            </section>
 
-    <h3>Stats</h3>
-    <p id="wins">Total wins: 0</p>
-    <p id="avgScore">Average Score: </p>
+            <!-- Leaderboard -->
+            <aside class="leaderboard-section">
+                <h2>Leaderboard</h2>
+                <ol>
+                    <li name="leaderboard">—</li>
+                    <li name="leaderboard">—</li>
+                    <li name="leaderboard">—</li>
+                </ol>
+            </aside>
+        </div>
 
-    <h3>Leaderboard</h3>
-    <ol>
-      <li name="leaderboard">100</li>
-      <li name="leaderboard">100</li>
-      <li name="leaderboard">100</li>
-    </ol>
-  </body>
+        <!-- Stats Display -->
+        <section class="stats-section">
+            <h2>Stats</h2>
+            <div class="stats-grid">
+                <p id="wins">Total wins: 0</p>
+                <p id="avgScore">Average Score: —</p>
+                <p id="fastestTime">Fastest Time: —</p>
+                <p id="avgTime">Average Time: —</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
 </html>
